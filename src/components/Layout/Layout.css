@@ -20,20 +20,30 @@
     justify-content: center;
     align-items: flex-end;
     background-color: #fff;
+    position: fixed ;
+    z-index: 10;
 }
 
 .navbar {
     width: 70%;
     height: 50px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.navbar nav {
+.navbarLeftSection {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbarLeftSection nav {
     width: 300px;
     display: flex;
     justify-content: space-between;
-    margin-left: 70px;
+    margin-left: 70px;  
 }
 
 
@@ -64,7 +74,7 @@
     font-size: 17px;
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    font-weight: bold;  
     transition: .2s;
 }
 
@@ -72,11 +82,90 @@
     color: #00e;
 }
 
+.userData {
+    width: 100px;
+    justify-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userDataLink {
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.userDataLink i {
+    font-size: 30px;
+
+}
+
 
 /* Main */
 
 .mainContent {
-    border: 1px solid #000;
     width: 100%;
     min-height: 60vh;
+    z-index: 20;
+    padding-top: 100px;
+}
+
+/* Footer */
+
+.footerCont {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.footer {
+    border-top: 2px solid #aaa;
+    border-bottom: 2px solid #aaa;
+    width: 70%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+
+.footerSection {
+    width: 270px;
+    height: 100%;
+    padding: 20px;
+    border-left: 2px solid #aaa;
+}
+
+.footerSection_name {
+    width: 90%;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    /* border: 1px solid #000; */
+}
+
+.footerSection_element {
+    width: 80%;
+
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.footerSection.borderLeft {
+    border: none;
+}
+
+
+
+
+
+.copy {
+    width: 70%;
+    border-bottom: 2px solid #aaa;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
