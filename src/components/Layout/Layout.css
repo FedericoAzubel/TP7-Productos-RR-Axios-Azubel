@@ -104,13 +104,16 @@
 }
 
 
+
 /* Main */
 
 .mainContent {
     width: 100%;
-    min-height: 60vh;
     z-index: 20;
     padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Footer */

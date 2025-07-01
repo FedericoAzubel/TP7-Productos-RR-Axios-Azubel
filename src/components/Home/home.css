@@ -1,0 +1,51 @@
+.home_container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #d7eefd, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home_things{ 
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.home_things h1, .home_things h2 {
+    width: 100%;
+    text-align: center;
+}
+
+.home_things h1 {
+    font-size: 50px;
+}
+
+.home_things h2 {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.shopBtn {
+    text-decoration: none;
+    color: #000;
+    width: 100px;
+    height: 40px;
+    border: 2px solid #00e;
+    color: #00e;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    transition: .3s;
+}
+
+.shopBtn:hover {
+    background-color: #00e;
+    color: #fff;
+}

@@ -7,12 +7,12 @@ const NavbarDesk = () => {
     <div className="navbarDesk">
       <div className="navbar">
         <div className="navbarLeftSection">
-          <Link className="logo_container">
+          <Link to='/home' className="logo_container">
             <i class="bx bxs-balloon"></i>
             <h1>BalloonStore</h1>
           </Link>
           <nav>
-            <Link className="navElement">
+            <Link to='/productos' className="navElement">
               <p>Shop</p>
             </Link>
             <Link className="navElement">

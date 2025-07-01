@@ -11,7 +11,6 @@ const Layout = () => {
       <NavbarDesk/>
       <NavbarMobile/>
       <main className='mainContent'>
-        wpdwjqdj
         <Outlet/>
       </main>
       <Footer/>
