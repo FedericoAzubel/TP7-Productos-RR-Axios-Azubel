@@ -1,10 +1,20 @@
 import React from 'react'
 import './productos.css'
+import { Link } from "react-router-dom";
 
-const ListadoProductos = ({ productos, categoria }) => {
+const ListadoProductos = ({ productos }) => {
   return (
     <div className='contenedor_cards'>
+      {
+        productos.map(producto => (
+          <Link to={`/producto/${producto.id}`} key={producto.id} className='card'>
+            <p className='card_name'>{producto.title}</p>
+            <img src={producto.thumbnail} className='card_img'></img>
+            <p className='card_price'>${producto.price}</p>
+          </Link>
 
+        ))
+      }
     </div>
     // <div className='productos_cont2'>
     //   <h2>{categoria === 'destacados' ? 'Destacados' : categoria}</h2>

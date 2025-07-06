@@ -42,9 +42,6 @@ const Productos = () => {
     obtenerProductos();
   }, [categoriaActiva]);
 
-  console.log(categorias)
-
-
   return (
     <div className="productosContainer">
       <div className="categorias_cont">
@@ -59,8 +56,8 @@ const Productos = () => {
             {categorias.map((cat, i) => (
               <button
                 key={i}
-                className={`cat ${categoriaActiva === cat ? "activa" : ""}`}
-                onClick={() => setCategoriaActiva(cat)}
+                className={`cat ${categoriaActiva === cat.slug ? "activa" : ""}`}
+                onClick={() => setCategoriaActiva(cat.slug)}
               >
                 <p>{cat.name}</p>
               </button>
@@ -69,7 +66,7 @@ const Productos = () => {
         </div>
       </div>
       <div className="prod_cont2">
-        <ListadoProductos productos={productos} categoria={categoriaActiva} />
+        <ListadoProductos productos={productos} />
       </div>
       
     </div>
