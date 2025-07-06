@@ -8,7 +8,7 @@ const Home = () => {
       <div className='home_things'>
         <h1>BalloonStore</h1>
         <h2>Todos los productos que necesitas en un solo lugar</h2>
-        <Link className='shopBtn'>Shop</Link>
+        <Link to='/productos'className='shopBtn'>Shop</Link>
       </div>
     </div>
   )

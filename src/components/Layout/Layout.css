@@ -5,12 +5,6 @@
     font-family: Nunito, 'sans-serif';
 }
 
-/* Oculto el navMobile en desktop */
-
-.navbarMobile {
-    display: none;
-}
-
 /* NavbarDesktop */
 
 .navbarDesk {

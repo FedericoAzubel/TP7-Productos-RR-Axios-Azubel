@@ -15,7 +15,7 @@ const NavbarDesk = () => {
             <Link to='/productos' className="navElement">
               <p>Shop</p>
             </Link>
-            <Link className="navElement">
+            <Link to='/contacto' className="navElement">
               <p>Contacto</p>
             </Link>
           </nav>
