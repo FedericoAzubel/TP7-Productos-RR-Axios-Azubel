@@ -34,7 +34,7 @@ const DetalleProducto = () => {
         </div>
         <button>Add to cart</button>
       </div>
-      <img src={producto.thumbnail} className='product_img'></img>
+      <img src={producto.images[0]} className='product_img'></img>
     </div>
   )
 }
