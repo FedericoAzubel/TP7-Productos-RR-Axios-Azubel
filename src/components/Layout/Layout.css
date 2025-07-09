@@ -5,8 +5,7 @@
   font-family: Nunito, "sans-serif";
 }
 
-.layout_container {
-}
+.layout_container {}
 
 /* NavbarDesktop */
 
@@ -192,17 +191,17 @@
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.3);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.7s ease;
-    z-index: 100;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.7s ease;
+  z-index: 100;
+}
 
 /* Mostrar overlay */
 .overlay.active {
@@ -213,20 +212,20 @@
 
 /* Menú desplegable */
 .searchMenu {
-    position: fixed;
-    top: -1000px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 500px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    transition: top 0.7s ease;
-    z-index: 101;
-    display: flex;
-    justify-content: center;
-  }
+  position: fixed;
+  top: -1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 500px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: top 0.7s ease;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+}
 
 /* Menú desplegable visible */
 .searchMenu.active {
@@ -235,20 +234,22 @@
 
 
 .searchContent {
-    width: 70%;
-    height: 100%;
-    padding-top: 20px;
-    /* border: 1px solid #000; */
+  width: 70%;
+  height: 100%;
+  padding-top: 20px;
+  /* border: 1px solid #000; */
 }
 
 .inputContainer {
-    width: 100%;
-    height: 100px;
-    /* border: 1px solid #000; */
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid #777;
+  width: 100%;
+  height: 100px;
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #777;
+  margin-bottom: 50px;
 }
+
 /* 
 .inputContainer {
     width: 100%;
@@ -258,39 +259,91 @@
 } */
 
 .inputContainer_btn {
-    width: 40px;
-    height: 60px;
-    background-color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    outline: none;
+  width: 40px;
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
 }
 
 .inputContainer_btn i {
-    font-size: 30px;
-    font-weight: none;
+  font-size: 30px;
+  font-weight: none;
 }
 
 .inputContainer input {
-    background-color: #fff;
-    border: none;
-    outline: none;
-    width: 95%;
-    height: 60px;
-    font-size: 30px;
-    color: #000;
-    font-weight: 600;
-    padding-left: 5px;
-    padding-right: 20px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  width: 95%;
+  height: 60px;
+  font-size: 30px;
+  color: #000;
+  font-weight: 600;
+  padding-left: 5px;
+  padding-right: 20px;
 }
 
 .inputContainer input::placeholder {
-    color: #777;
-    font-weight: 600;
+  color: #777;
+  font-weight: 600;
 }
 
 .inputContainer_btn.x:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+
+.resultadosBusqueda {
+  width: 700px;
+  height: 330px;
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.resultadoProdCont {
+  width: 300px;
+  height: 100%;
+  /* border: 1px solid #000; */
+}
+
+.prodsRelacionados {
+  font-size: 18px;
+  font-weight: 800;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.listaPrelacionados {
+  width: 100%;
+  height: auto;
+  /* border: 1px solid #000; */
+  list-style: none;
+  padding: 0;
+  /* color: #000;
+  text-decoration: none; */
+}
+
+.listaPrelacionados li {
+  width: 100%;
+  height: auto;
+  text-decoration: none;
+  margin-bottom: 10px;
+  /* border: 1px solid #000; */
+}
+
+
+.elementList {
+  color: #000;
+  text-decoration: none;
+  font-size: 16px;
+  transition: .2s;
+}
+
+.elementList:hover {
+  color: #00e;
 }
