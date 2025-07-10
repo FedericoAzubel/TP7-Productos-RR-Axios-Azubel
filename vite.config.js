@@ -6,3 +6,5 @@ export default defineConfig({
   base: '/TP7-Productos-RR-Axios-Azubel/', // 👈 IMPORTANTE: el nombre del repositorio con slashs
   plugins: [react()],
 })
+
+// github pages
