@@ -1,8 +1,11 @@
 import React from "react";
 import "../Layout/Layout.css";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 const NavbarDesk = ( {openSearch} ) => {
+  const { getItemsCount } = useCart();
+  const itemsCount = getItemsCount();
   return (
     <div className="navbarDesk">
       <div className="navbar">
@@ -26,8 +29,11 @@ const NavbarDesk = ( {openSearch} ) => {
             <i class="bx bx-search"></i>
             <p>Búsqueda</p>
           </button>
-          <Link className="userDataLink">
-            <i class="bx bx-cart"></i>
+          <Link to="/carrito" className="userDataLink">
+            <div className="cartIcon">
+              <i class="bx bx-cart"></i>
+              {itemsCount > 0 && <span className="cartCount">{itemsCount}</span>}
+            </div>
           </Link>
           <Link className="userDataLink">
             <i class="bx bx-user"></i>

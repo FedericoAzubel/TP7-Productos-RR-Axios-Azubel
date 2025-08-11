@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../components/DetalleProducto/Detalle.css'
+import { useCart } from '../context/CartContext';
 
 const DetalleProducto = () => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const obtenerProducto = async () => {
@@ -32,7 +34,7 @@ const DetalleProducto = () => {
         <div className="description_cont">
           <p>{producto.description}</p>
         </div>
-        <button>Add to cart</button>
+        <button onClick={() => addToCart(producto)}>Add to cart</button>
       </div>
       <img src={producto.images[0]} className='product_img'></img>
     </div>

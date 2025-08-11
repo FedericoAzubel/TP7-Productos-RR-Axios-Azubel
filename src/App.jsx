@@ -5,6 +5,8 @@ import Productos from "./pages/Productos";
 import Producto from "./pages/DetalleProducto";
 import Contacto from "./pages/Contacto"
 import ResultadoBusqueda from "./components/Buscador/ResultadoBusqueda";
+import Carrito from "./pages/Carrito";
+import CompraExitosa from "./pages/CompraExitosa";
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
           <Route path='/producto/:id' element={<Producto />}></Route>
           <Route path='/contacto' element={<Contacto/>}></Route>
           <Route path='/resultadoBusqueda' element={<ResultadoBusqueda />} />
+          <Route path='/carrito' element={<Carrito />} />
+          <Route path='/compra-exitosa' element={<CompraExitosa />} />
         </Route>
       </Routes>
     </>

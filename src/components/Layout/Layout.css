@@ -5,7 +5,7 @@
   font-family: Nunito, "sans-serif";
 }
 
-.layout_container {}
+
 
 /* NavbarDesktop */
 
@@ -98,6 +98,25 @@
   font-size: 30px;
 }
 
+/* Cart badge */
+.cartIcon {
+  position: relative;
+}
+.cartCount {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #e00;
+  color: #fff;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Main */
 
 .mainContent {
@@ -107,6 +126,127 @@
   display: flex;
   justify-content: center;
 }
+
+/* Cart page */
+.cartPage {
+  width: 70%;
+  min-height: 60vh;
+  padding-top: 30px;
+}
+.cartList {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+.cartItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+.cartItemInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cartItemImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.removeBtn {
+  border: none;
+  background: transparent;
+  color: #e00;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cartSummary {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.primaryBtn {
+  border: none;
+  background: #00e;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.primaryBtn:hover { background: #00f; }
+.secondaryBtn {
+  border: 2px solid #00e;
+  background: #fff;
+  color: #00e;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primaryLink {
+  color: #00e;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.cartEmpty {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cartTotalActions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cartTotal {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Success page */
+.successPage {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.successCard {
+  width: 520px;
+  padding: 28px;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.successIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #e6f0ff;
+  color: #00e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 900;
+}
+.successTitle { font-size: 26px; }
+.successText { color: #555; }
+.successActions { display: flex; gap: 10px; margin-top: 6px; }
 
 /* Footer */
 
