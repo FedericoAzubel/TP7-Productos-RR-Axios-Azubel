@@ -70,7 +70,7 @@ export const CartProvider = ({ children }) => {
   const setItemQuantity = (productId, quantity) => {
     const next = Number.isFinite(quantity) ? Math.floor(quantity) : 1;
     if (next <= 0) {
-      // Remove item when quantity is zero or less
+      // Remueve el item cuando la cantidad es 0 o menos
       setCartItems((prev) => prev.filter((item) => item.id !== productId));
       return;
     }
