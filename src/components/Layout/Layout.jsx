@@ -5,20 +5,26 @@ import NavbarDesk from "../NavbarDesk/NavbarDesk";
 import Footer from "../Footer/Footer";
 import Buscador from "../Buscador/Buscador";
 import Overlay from "../Buscador/Overlay";
+import CartWidget from "../Carrito/CartWidget";
 
 const Layout = () => {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const openSearch = () => setSearchOpen(true);
   const closeSearch = () => setSearchOpen(false);
+  const openCart = () => setCartOpen(true);
+  const closeCart = () => setCartOpen(false);
 
   return (
     <div className="layout_container">
       {/* Buscador y Overlay con control de visibilidad */}
       <Buscador isOpen={searchOpen} onClose={closeSearch} />
       <Overlay searchOpen={searchOpen} closeSearch={closeSearch}/>
+      {/* Cart widget global */}
+      <CartWidget isOpen={cartOpen} onClose={closeCart} />
 
-      <NavbarDesk openSearch={openSearch} />
+      <NavbarDesk openSearch={openSearch} openCart={openCart} />
       <main className="mainContent">
         <Outlet />
       </main>
