@@ -71,4 +71,4 @@ export const useCart = () => {
   return ctx;
 };
 
-
+// Esto es un custom hook para acceder de manera mas segura a CartContext. Esto solo permite que los componentes englobados en CartContext puedan leer su contenido. Es simplemente para que el código este más limpio.
