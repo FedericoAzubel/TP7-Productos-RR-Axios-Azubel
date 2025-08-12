@@ -4,7 +4,7 @@ import { useCart } from "../context/CartContext";
 import CartItem from "../components/Carrito/CartItem";
 
 const Carrito = () => {
-  const { cartItems, removeFromCart, clearCart, getTotal } = useCart();
+  const { cartItems, removeFromCart, clearCart, getTotal, increaseQuantity, decreaseQuantity, setItemQuantity } = useCart();
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -25,7 +25,14 @@ const Carrito = () => {
         <>
           <ul className="cartList">
             {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} onRemove={removeFromCart} />
+              <CartItem
+                key={item.id}
+                item={item}
+                onRemove={removeFromCart}
+                onIncrease={increaseQuantity}
+                onDecrease={decreaseQuantity}
+                onSetQuantity={setItemQuantity}
+              />
             ))}
           </ul>
           <div className="cartSummary">

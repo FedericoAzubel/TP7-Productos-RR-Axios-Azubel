@@ -8,6 +8,7 @@ const DetalleProducto = () => {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const { addToCart } = useCart();
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     const obtenerProducto = async () => {
@@ -24,6 +25,9 @@ const DetalleProducto = () => {
   if (!producto) {
     return <p>Cargando producto...</p>;
   }
+  const handleAdd = () => {
+    addToCart(producto, quantity);
+  };
   return (
     <div className='producto_container'>
       <div className="product_data">
@@ -34,7 +38,18 @@ const DetalleProducto = () => {
         <div className="description_cont">
           <p>{producto.description}</p>
         </div>
-        <button onClick={() => addToCart(producto)}>Add to cart</button>
+        <div className='qty_row'>
+          <button aria-label='Disminuir' className='qtyBtn' onClick={() => setQuantity(q => Math.max(1, q - 1))}>-</button>
+          <input
+            className='qtyInput'
+            type='number'
+            min={1}
+            value={quantity}
+            onChange={(e) => setQuantity(Math.max(1, Math.floor(Number(e.target.value) || 1)))}
+          />
+          <button aria-label='Aumentar' className='qtyBtn' onClick={() => setQuantity(q => q + 1)}>+</button>
+        </div>
+        <button className='addToCartBtn' onClick={handleAdd}>Agregar al carrito</button>
       </div>
       <img src={producto.images[0]} className='product_img'></img>
     </div>

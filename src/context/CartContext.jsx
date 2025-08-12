@@ -20,14 +20,15 @@ export const CartProvider = ({ children }) => {
     }
   }, [cartItems]);
 
-  const addToCart = (product) => {
+  const addToCart = (product, quantity = 1) => {
     if (!product || typeof product !== "object") return;
+    const qtyToAdd = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
       if (existing) {
         return prev.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + qtyToAdd }
             : item
         );
       }
@@ -36,7 +37,7 @@ export const CartProvider = ({ children }) => {
         title: product.title,
         price: product.price,
         image: product.images?.[0] ?? product.thumbnail ?? "",
-        quantity: 1,
+        quantity: qtyToAdd,
       };
       return [...prev, normalized];
     });
@@ -44,6 +45,38 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId) => {
     setCartItems((prev) => prev.filter((item) => item.id !== productId));
+  };
+
+  const increaseQuantity = (productId, step = 1) => {
+    const stepValue = Number.isFinite(step) && step > 0 ? Math.floor(step) : 1;
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === productId ? { ...item, quantity: item.quantity + stepValue } : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId, step = 1) => {
+    const stepValue = Number.isFinite(step) && step > 0 ? Math.floor(step) : 1;
+    setCartItems((prev) =>
+      prev
+        .map((item) =>
+          item.id === productId ? { ...item, quantity: item.quantity - stepValue } : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const setItemQuantity = (productId, quantity) => {
+    const next = Number.isFinite(quantity) ? Math.floor(quantity) : 1;
+    if (next <= 0) {
+      // Remove item when quantity is zero or less
+      setCartItems((prev) => prev.filter((item) => item.id !== productId));
+      return;
+    }
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === productId ? { ...item, quantity: next } : item))
+    );
   };
 
   const clearCart = () => setCartItems([]);
@@ -55,7 +88,17 @@ export const CartProvider = ({ children }) => {
     cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const value = useMemo(
-    () => ({ cartItems, addToCart, removeFromCart, clearCart, getTotal, getItemsCount }),
+    () => ({
+      cartItems,
+      addToCart,
+      removeFromCart,
+      clearCart,
+      getTotal,
+      getItemsCount,
+      increaseQuantity,
+      decreaseQuantity,
+      setItemQuantity,
+    }),
     [cartItems]
   );
 

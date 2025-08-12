@@ -117,4 +117,23 @@
   cursor: pointer;
 }
 
+/* Quantity controls */
+.cartItemText { display: flex; flex-direction: column; gap: 4px; }
+.cartItemQty { display: flex; align-items: center; gap: 6px; }
+.qtyBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+}
+.qtyInput {
+  width: 56px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 0 6px;
+}
+
 

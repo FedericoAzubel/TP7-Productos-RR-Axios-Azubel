@@ -6,7 +6,7 @@ import "./CartWidget.css";
 
 const CartWidget = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
-  const { cartItems, removeFromCart, getTotal } = useCart();
+  const { cartItems, removeFromCart, getTotal, increaseQuantity, decreaseQuantity, setItemQuantity } = useCart();
 
   if (!isOpen) return null;
 
@@ -44,7 +44,14 @@ const CartWidget = ({ isOpen, onClose }) => {
           <>
             <ul className="cartWidgetList">
               {cartItems.map((item) => (
-                <CartItem key={item.id} item={item} onRemove={removeFromCart} />
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  onRemove={removeFromCart}
+                  onIncrease={increaseQuantity}
+                  onDecrease={decreaseQuantity}
+                  onSetQuantity={setItemQuantity}
+                />
               ))}
             </ul>
             <footer className="cartWidgetFooter">
