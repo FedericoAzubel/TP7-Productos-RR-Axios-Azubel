@@ -17,10 +17,10 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     } catch {
       // ignore storage errors
-    }
+    } 
   }, [cartItems]);
 
-  const addToCart = (product, quantity = 1) => {
+  const addToCart = (product, quantity) => {
     if (!product || typeof product !== "object") return;
     const qtyToAdd = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
     setCartItems((prev) => {
