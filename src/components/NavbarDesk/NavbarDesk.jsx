@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "../Layout/Layout.css";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
@@ -45,3 +46,8 @@ const NavbarDesk = ( {openSearch, openCart} ) => {
 };
 
 export default NavbarDesk;
+
+NavbarDesk.propTypes = {
+  openSearch: PropTypes.func.isRequired,
+  openCart: PropTypes.func.isRequired,
+};

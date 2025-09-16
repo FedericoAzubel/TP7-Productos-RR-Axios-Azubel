@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../Layout/Layout.css";
@@ -131,3 +132,8 @@ const Buscador = ({ isOpen, onClose }) => {
 };
 
 export default Buscador;
+
+Buscador.propTypes = {
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
+};

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './productos.css'
 import { Link } from "react-router-dom";
 
@@ -32,3 +33,14 @@ const ListadoProductos = ({ productos }) => {
 }
 
 export default ListadoProductos
+
+ListadoProductos.propTypes = {
+  productos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+      title: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      images: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ).isRequired,
+}

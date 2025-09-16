@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const CartItem = ({ item, onRemove, onIncrease, onDecrease, onSetQuantity }) => {
   const handleChange = (e) => {
@@ -38,4 +39,18 @@ const CartItem = ({ item, onRemove, onIncrease, onDecrease, onSetQuantity }) => 
 
 export default CartItem;
 
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    image: PropTypes.string,
+    quantity: PropTypes.number.isRequired,
+  }).isRequired,
+  onRemove: PropTypes.func.isRequired,
+  onIncrease: PropTypes.func,
+  onDecrease: PropTypes.func,
+  onSetQuantity: PropTypes.func,
+};
 
