@@ -1,11 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import CartItem from "./CartItem";
 import "./CartWidget.css";
 
-const CartWidget = ({ isOpen, onClose }) => {
+type Props = { isOpen?: boolean; onClose?: () => void }
+
+const CartWidget: React.FC<Props> = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
   const { cartItems, removeFromCart, getTotal, increaseQuantity, decreaseQuantity, setItemQuantity } = useCart();
 
@@ -15,7 +16,7 @@ const CartWidget = ({ isOpen, onClose }) => {
     onClose?.();
   };
 
-  const handleContentClick = (event) => {
+  const handleContentClick = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
 
@@ -74,8 +75,4 @@ const CartWidget = ({ isOpen, onClose }) => {
 export default CartWidget;
 
 
-CartWidget.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-};
 

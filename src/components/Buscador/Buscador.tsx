@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "../Layout/Layout.css";
+import { fetchCategories, searchProducts } from "../../lib/api";
+import type { Product } from "../../types/product";
 
-const Buscador = ({ isOpen, onClose }) => {
-  const [categorias, setCategorias] = useState([]);
+type Category = { name: string; slug: string }
+type Props = { isOpen?: boolean; onClose: () => void }
+
+const Buscador: React.FC<Props> = ({ isOpen, onClose }) => {
+  const [categorias, setCategorias] = useState<Category[]>([]);
   const [busqueda, setBusqueda] = useState("");
-  const [resultadosProductos, setResultadosProductos] = useState([]);
-  const [resultadosCategorias, setResultadosCategorias] = useState([]);
+  const [resultadosProductos, setResultadosProductos] = useState<Product[]>([]);
+  const [resultadosCategorias, setResultadosCategorias] = useState<Category[]>([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const obtenerCategorias = async () => {
-      try {
-        const res = await axios.get("https://dummyjson.com/products/categories");
-        const primeras9 = res.data.slice(0, 9);
-        setCategorias([{ name: 'Destacados', slug: 'destacados' }, ...primeras9]);
-      } catch (error) {
-        console.error("Error al obtener categorías:", error);
-      }
-    };
-    obtenerCategorias();
+    fetchCategories()
+      .then(setCategorias)
+      .catch((error) => console.error("Error al obtener categorías:", error));
   }, []);
 
   useEffect(() => {
@@ -34,11 +30,9 @@ const Buscador = ({ isOpen, onClose }) => {
       }
 
       try {
-        // Buscar productos relacionados
-        const res = await axios.get(`https://dummyjson.com/products/search?q=${busqueda}`);
-        setResultadosProductos(res.data.products.slice(0, 5));
+        const prods = await searchProducts(busqueda);
+        setResultadosProductos(prods.slice(0, 5));
 
-        // Buscar categorías relacionadas localmente
         const texto = busqueda.toLowerCase();
         const categoriasFiltradas = categorias.filter(c =>
           c.name.toLowerCase().includes(texto)
@@ -51,11 +45,11 @@ const Buscador = ({ isOpen, onClose }) => {
       }
     };
 
-    const delay = setTimeout(fetchBusqueda, 300); // Debounce
+    const delay = setTimeout(fetchBusqueda, 300);
     return () => clearTimeout(delay);
   }, [busqueda, categorias]);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && busqueda.trim()) {
       navigate(`/resultadoBusqueda?busqueda=${encodeURIComponent(busqueda)}`);
       onClose();
@@ -88,7 +82,7 @@ const Buscador = ({ isOpen, onClose }) => {
               <ul className="listaPrelacionados">
                 {resultadosProductos.length > 0 ? (
                   resultadosProductos.map(prod => (
-                    <li key={prod.id}>
+                    <li key={String(prod.id)}>
                       <Link
                         to={`/producto/${prod.id}`}
                         className="elementList"
@@ -133,7 +127,5 @@ const Buscador = ({ isOpen, onClose }) => {
 
 export default Buscador;
 
-Buscador.propTypes = {
-  isOpen: PropTypes.bool,
-  onClose: PropTypes.func,
-};
+
+

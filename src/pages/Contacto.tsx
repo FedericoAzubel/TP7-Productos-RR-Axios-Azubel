@@ -1,8 +1,7 @@
 import React from 'react'
 import '../components/Contacto/Contacto.css'
 
-
-const Contacto = () => {
+const Contacto: React.FC = () => {
   return (
     <div className='contacto_container'>
         <h1 className='msgAtencion'>¿Necesitas asistencia?</h1>
@@ -31,3 +30,6 @@ const Contacto = () => {
 }
 
 export default Contacto
+
+
+

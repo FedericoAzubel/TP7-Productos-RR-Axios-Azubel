@@ -1,8 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import '../Layout/Layout.css'
 
-const Overlay = ({ searchOpen, closeSearch }) => {
+type Props = { searchOpen?: boolean; closeSearch?: () => void }
+
+const Overlay: React.FC<Props> = ({ searchOpen, closeSearch }) => {
   return (
     <div
       className={`overlay ${searchOpen ? "active" : ""}`}
@@ -13,7 +14,5 @@ const Overlay = ({ searchOpen, closeSearch }) => {
 
 export default Overlay;
 
-Overlay.propTypes = {
-  searchOpen: PropTypes.bool,
-  closeSearch: PropTypes.func,
-};
+
+

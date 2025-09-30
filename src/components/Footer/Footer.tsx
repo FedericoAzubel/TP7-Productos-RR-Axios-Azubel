@@ -1,26 +1,17 @@
 import React, { useEffect, useState } from "react";
 import '../Layout/Layout.css'
-import axios from "axios";
+import { fetchCategories } from "../../lib/api";
 
+type Category = { name: string; slug: string }
 
-const Footer = () => {
-    const [categorias, setCategorias] = useState([]);
+const Footer: React.FC = () => {
+    const [categorias, setCategorias] = useState<Category[]>([]);
   
     useEffect(() => {
-    const obtenerCategorias = async () => {
-      try {
-        const res = await axios.get(
-          "https://dummyjson.com/products/categories"
-        );
-        const primeras9 = res.data.slice(0, 9); // total 10 con "destacados"
-        setCategorias([{ name: 'Destacados', slug: 'destacados' }, ...primeras9]);
-      } catch (error) {
-        console.error("Error al obtener categorías:", error);
-      }
-    };
-
-    obtenerCategorias();
-  }, []);
+      fetchCategories()
+        .then(setCategorias)
+        .catch((error) => console.error("Error al obtener categorías:", error));
+    }, []);
 
   return (
     <div className='footerCont'>
@@ -64,3 +55,5 @@ const Footer = () => {
 }
 
 export default Footer
+
+

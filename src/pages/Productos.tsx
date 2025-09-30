@@ -1,45 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "../components/Productos/productos.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import ListadoProductos from "../components/Productos/ListadoProductos";
+import { fetchCategories, fetchProducts } from "../lib/api";
+import type { Product } from "../types/product";
 
-const Productos = () => {
-  const [categorias, setCategorias] = useState([]);
-  const [categoriaActiva, setCategoriaActiva] = useState("destacados");
-  const [productos, setProductos] = useState([]);
+type Category = { name: string; slug: string };
+
+const Productos: React.FC = () => {
+  const [categorias, setCategorias] = useState<Category[]>([]);
+  const [categoriaActiva, setCategoriaActiva] = useState<string>("destacados");
+  const [productos, setProductos] = useState<Product[]>([]);
 
   useEffect(() => {
-    const obtenerCategorias = async () => {
-      try {
-        const res = await axios.get(
-          "https://dummyjson.com/products/categories"
-        );
-        const primeras9 = res.data.slice(0, 9); // total 10 con "destacados"
-        setCategorias([{ name: 'Destacados', slug: 'destacados' }, ...primeras9]);
-      } catch (error) {
-        console.error("Error al obtener categorías:", error);
-      }
-    };
-
-    obtenerCategorias();
+    fetchCategories()
+      .then(setCategorias)
+      .catch((error) => console.error("Error al obtener categorías:", error));
   }, []);
 
   useEffect(() => {
-    const obtenerProductos = async () => {
-      try {
-        const url =
-          categoriaActiva === "destacados"
-            ? "https://dummyjson.com/products"
-            : `https://dummyjson.com/products/category/${categoriaActiva}`;
-        const res = await axios.get(url);
-        setProductos(res.data.products);
-      } catch (error) {
-        console.error("Error al obtener productos:", error);
-      }
-    };
-
-    obtenerProductos();
+    fetchProducts(categoriaActiva)
+      .then(setProductos)
+      .catch((error) => console.error("Error al obtener productos:", error));
   }, [categoriaActiva]);
 
   return (
@@ -68,9 +50,10 @@ const Productos = () => {
       <div className="prod_cont2">
         <ListadoProductos productos={productos} />
       </div>
-      
     </div>
   );
 };
 
 export default Productos;
+
+

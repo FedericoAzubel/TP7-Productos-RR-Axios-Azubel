@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import CartItem from "../components/Carrito/CartItem";
 
-const Carrito = () => {
+const Carrito: React.FC = () => {
   const { cartItems, removeFromCart, clearCart, getTotal, increaseQuantity, decreaseQuantity, setItemQuantity } = useCart();
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const Carrito = () => {
           <ul className="cartList">
             {cartItems.map((item) => (
               <CartItem
-                key={item.id}
+                key={String(item.id)}
                 item={item}
                 onRemove={removeFromCart}
                 onIncrease={increaseQuantity}
@@ -49,3 +49,5 @@ const Carrito = () => {
 };
 
 export default Carrito;
+
+

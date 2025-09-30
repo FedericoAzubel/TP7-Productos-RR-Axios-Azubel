@@ -2,7 +2,7 @@ import React from 'react'
 import '../components/Home/home.css'
 import {Link} from 'react-router-dom'
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <div className='home_container'>
       <div className='home_things'>
@@ -15,3 +15,6 @@ const Home = () => {
 }
 
 export default Home
+
+
+

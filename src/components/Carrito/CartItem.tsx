@@ -1,8 +1,23 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const CartItem = ({ item, onRemove, onIncrease, onDecrease, onSetQuantity }) => {
-  const handleChange = (e) => {
+type Item = {
+  id: number | string;
+  title: string;
+  price: number;
+  image?: string;
+  quantity: number;
+}
+
+type Props = {
+  item: Item;
+  onRemove: (id: number | string) => void;
+  onIncrease?: (id: number | string) => void;
+  onDecrease?: (id: number | string) => void;
+  onSetQuantity?: (id: number | string, qty: number) => void;
+}
+
+const CartItem: React.FC<Props> = ({ item, onRemove, onIncrease, onDecrease, onSetQuantity }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     if (Number.isNaN(value)) return;
     onSetQuantity?.(item.id, value);
@@ -40,17 +55,4 @@ const CartItem = ({ item, onRemove, onIncrease, onDecrease, onSetQuantity }) => 
 export default CartItem;
 
 
-CartItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    image: PropTypes.string,
-    quantity: PropTypes.number.isRequired,
-  }).isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onIncrease: PropTypes.func,
-  onDecrease: PropTypes.func,
-  onSetQuantity: PropTypes.func,
-};
 

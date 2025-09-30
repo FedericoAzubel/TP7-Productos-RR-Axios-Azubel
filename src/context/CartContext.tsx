@@ -1,13 +1,32 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 
-const CartContext = createContext(null);
+type CartItem = {
+  id: number | string;
+  title: string;
+  price: number;
+  image: string;
+  quantity: number;
+}
 
-export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
+type CartContextValue = {
+  cartItems: CartItem[];
+  addToCart: (product: any, quantity: number) => void;
+  removeFromCart: (productId: number | string) => void;
+  clearCart: () => void;
+  getTotal: () => number;
+  getItemsCount: () => number;
+  increaseQuantity: (productId: number | string, step?: number) => void;
+  decreaseQuantity: (productId: number | string, step?: number) => void;
+  setItemQuantity: (productId: number | string, quantity: number) => void;
+}
+
+const CartContext = createContext<CartContextValue | null>(null);
+
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try {
       const stored = localStorage.getItem("cartItems");
-      return stored ? JSON.parse(stored) : [];
+      return stored ? JSON.parse(stored) as CartItem[] : [];
     } catch {
       return [];
     }
@@ -21,7 +40,7 @@ export const CartProvider = ({ children }) => {
     } 
   }, [cartItems]);
 
-  const addToCart = (product, quantity) => {
+  const addToCart = (product: any, quantity: number) => {
     if (!product || typeof product !== "object") return;
     const qtyToAdd = Number.isFinite(quantity) && quantity > 0 ? Math.floor(quantity) : 1;
     setCartItems((prev) => {
@@ -33,7 +52,7 @@ export const CartProvider = ({ children }) => {
             : item
         );
       }
-      const normalized = {
+      const normalized: CartItem = {
         id: product.id,
         title: product.title,
         price: product.price,
@@ -44,11 +63,11 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const removeFromCart = (productId) => {
+  const removeFromCart = (productId: number | string) => {
     setCartItems((prev) => prev.filter((item) => item.id !== productId));
   };
 
-  const increaseQuantity = (productId, step = 1) => {
+  const increaseQuantity = (productId: number | string, step = 1) => {
     const stepValue = Number.isFinite(step) && step > 0 ? Math.floor(step) : 1;
     setCartItems((prev) =>
       prev.map((item) =>
@@ -57,7 +76,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const decreaseQuantity = (productId, step = 1) => {
+  const decreaseQuantity = (productId: number | string, step = 1) => {
     const stepValue = Number.isFinite(step) && step > 0 ? Math.floor(step) : 1;
     setCartItems((prev) =>
       prev
@@ -68,10 +87,9 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const setItemQuantity = (productId, quantity) => {
+  const setItemQuantity = (productId: number | string, quantity: number) => {
     const next = Number.isFinite(quantity) ? Math.floor(quantity) : 1;
     if (next <= 0) {
-      // Remueve el item cuando la cantidad es 0 o menos
       setCartItems((prev) => prev.filter((item) => item.id !== productId));
       return;
     }
@@ -88,7 +106,7 @@ export const CartProvider = ({ children }) => {
   const getItemsCount = () =>
     cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const value = useMemo(
+  const value: CartContextValue = useMemo(
     () => ({
       cartItems,
       addToCart,
@@ -103,9 +121,6 @@ export const CartProvider = ({ children }) => {
     [cartItems]
   );
 
-  //   Cuando se usa Context API, si el value que le pasas a <CartContext.Provider> cambia en cada render (aunque los datos sean iguales), React forzará que todos los componentes que usan el contexto se vuelvan a renderizar.
-  //   useMemo evita eso porque mantiene la misma referencia en memoria si no cambió nada importante.
-
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
@@ -115,8 +130,4 @@ export const useCart = () => {
   return ctx;
 };
 
-// Esto es un custom hook para acceder de manera mas segura a CartContext. Esto solo permite que los componentes englobados en CartContext puedan leer su contenido. Es simplemente para que el código este más limpio.
 
-CartProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};

@@ -1,53 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import ListadoProductos from '../Productos/ListadoProductos';
 import '../Layout/Layout.css';
+import { fetchCategories, fetchProducts, searchProducts } from '../../lib/api';
+import type { Product } from '../../types/product';
 
-const ResultadoBusqueda = () => {
+type Category = { name: string; slug: string }
+
+const ResultadoBusqueda: React.FC = () => {
   const [searchParams] = useSearchParams();
   const categoriaSlug = searchParams.get("categoria");
   const busqueda = searchParams.get("busqueda");
 
-  const [productos, setProductos] = useState([]);
-  const [categorias, setCategorias] = useState([]);
+  const [productos, setProductos] = useState<Product[]>([]);
+  const [categorias, setCategorias] = useState<Category[]>([]);
   const [titulo, setTitulo] = useState("Resultados");
 
   useEffect(() => {
-    const obtenerCategorias = async () => {
-      try {
-        const res = await axios.get("https://dummyjson.com/products/categories");
-        const primeras9 = res.data.slice(0, 9);
-        setCategorias([{ name: 'Destacados', slug: 'destacados' }, ...primeras9]);
-      } catch (error) {
-        console.error("Error al obtener categorías:", error);
-      }
-    };
-
-    obtenerCategorias();
+    fetchCategories()
+      .then(setCategorias)
+      .catch((error) => console.error("Error al obtener categorías:", error));
   }, []);
 
   useEffect(() => {
     const obtenerResultados = async () => {
       try {
-        let res;
         if (busqueda) {
-          res = await axios.get(`https://dummyjson.com/products/search?q=${busqueda}`);
-          setProductos(res.data.products);
+          const res = await searchProducts(busqueda)
+          setProductos(res);
           setTitulo(
-            res.data.products.length > 0
+            res.length > 0
               ? `Resultados para: "${busqueda}"`
               : `No se encontraron resultados para: "${busqueda}"`
           );
         } else if (categoriaSlug) {
-          res = await axios.get(`https://dummyjson.com/products/category/${categoriaSlug}`);
-          setProductos(res.data.products);
+          const prods = await fetchProducts(categoriaSlug)
+          setProductos(prods);
 
           const categoriaEncontrada = categorias.find(c => c.slug === categoriaSlug);
           const nombreAMostrar = categoriaEncontrada ? categoriaEncontrada.name : categoriaSlug;
 
           setTitulo(
-            res.data.products.length > 0
+            prods.length > 0
               ? `${nombreAMostrar}`
               : `No se encontraron productos en la categoría: ${nombreAMostrar}`
           );
@@ -84,3 +78,6 @@ const ResultadoBusqueda = () => {
 };
 
 export default ResultadoBusqueda;
+
+
+

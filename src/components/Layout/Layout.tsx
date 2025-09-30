@@ -7,7 +7,7 @@ import Buscador from "../Buscador/Buscador";
 import Overlay from "../Buscador/Overlay";
 import CartWidget from "../Carrito/CartWidget";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -18,10 +18,8 @@ const Layout = () => {
 
   return (
     <div className="layout_container">
-      {/* Buscador y Overlay con control de visibilidad */}
       <Buscador isOpen={searchOpen} onClose={closeSearch} />
       <Overlay searchOpen={searchOpen} closeSearch={closeSearch}/>
-      {/* Cart widget global */}
       <CartWidget isOpen={cartOpen} onClose={closeCart} />
 
       <NavbarDesk openSearch={openSearch} openCart={openCart} />
@@ -34,3 +32,6 @@ const Layout = () => {
 };
 
 export default Layout;
+
+
+

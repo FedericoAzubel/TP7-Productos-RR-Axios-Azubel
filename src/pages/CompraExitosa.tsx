@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CompraExitosa = () => {
+const CompraExitosa: React.FC = () => {
   return (
     <div className="successPage">
       <div className="successCard">
@@ -18,5 +18,6 @@ const CompraExitosa = () => {
 };
 
 export default CompraExitosa;
+
 
 

@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import '../components/DetalleProducto/Detalle.css'
 import { useCart } from '../context/CartContext';
+import { fetchProductById } from '../lib/api';
+import type { Product } from '../types/product';
 
-const DetalleProducto = () => {
-  const { id } = useParams();
-  const [producto, setProducto] = useState(null);
+const DetalleProducto: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [producto, setProducto] = useState<Product | null>(null);
   const { addToCart } = useCart();
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number>(1);
 
   useEffect(() => {
-    const obtenerProducto = async () => {
-      try {
-        const res = await axios.get(`https://dummyjson.com/products/${id}`);
-        setProducto(res.data);
-      } catch (error) {
-        console.error('Error al obtener producto:', error);
-      }
-    };
-
-    obtenerProducto();
+    if (!id) return;
+    fetchProductById(id)
+      .then(setProducto)
+      .catch((error) => console.error('Error al obtener producto:', error));
   }, [id]);
   if (!producto) {
     return <p>Cargando producto...</p>;
@@ -57,3 +52,4 @@ const DetalleProducto = () => {
 }
 
 export default DetalleProducto
+
